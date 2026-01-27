@@ -1,5 +1,9 @@
 # Online Ticket Platform – Backend Workspace
 
+## Services Documentations
+**Identity Service** → [Detailed Documentation](https://github.com/Aceltino/online-ticket-platform/blob/main/apps/identity-service/readme.md)
+---
+
 ## 1. Platform Overview
 
 The **Online Ticket Platform** is a modular backend system designed to support a scalable, event-driven, and service-oriented architecture.
