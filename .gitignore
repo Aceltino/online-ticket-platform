@@ -1,0 +1,56 @@
+# ===== Build output =====
+dist/
+build/
+out-tsc/
+tmp/
+
+# ===== Dependencies =====
+node_modules/
+
+# ===== Nx =====
+.nx/cache
+.nx/workspace-data
+
+# ===== Environment =====
+.env
+.env.*
+!.env.example
+
+# ===== Logs =====
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-error.log
+
+# ===== Tests =====
+coverage/
+test-output/
+
+# ===== Docker volumes =====
+**/pgdata
+**/redisdata
+**/redisinsightdata
+
+# ===== IDEs =====
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+.idea/
+.project
+.classpath
+.settings/
+.c9/
+*.launch
+*.sublime-workspace
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+
+# ===== Misc =====
+.cursor/
+*.tsbuildinfo

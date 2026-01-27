@@ -1,0 +1,34 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/infrastructure/persistence/prisma/generated-client"
+}
+
+enum USER_ROLE {
+  COMPANY_OPERATOR
+  DRIVER_INDEPENDENT
+  ADMIN
+}
+
+enum USER_STATUS {
+  PENDING
+  ACTIVE
+  SUSPENDED
+}
+
+model User {
+  id            String     @id @default(uuid())
+  email         String     @unique
+  passwordHash  String     @map("password_hash")
+  role          USER_ROLE
+  status        USER_STATUS
+  createdAt     DateTime   @default(now()) @map("created_at")
+  updatedAt     DateTime   @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+

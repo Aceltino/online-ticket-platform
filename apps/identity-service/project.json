@@ -1,0 +1,97 @@
+{
+  "name": "@org/identity-service",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/identity-service/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/identity-service",
+        "format": ["cjs"],
+        "bundle": false,  
+        "main": "apps/identity-service/src/main.ts",
+        "tsConfig": "apps/identity-service/tsconfig.app.json",
+        "assets": [
+          {
+            "input": "apps/identity-service",
+            "glob": "**/*.json",
+            "output": "."
+          },
+          {
+            "input": "apps/identity-service",
+            "glob": "**/*.yml",
+            "output": "."
+          },
+          {
+            "input": "apps/identity-service",
+            "glob": ".env*",
+            "output": "."
+          },
+          {
+            "input": "apps/identity-service",
+            "glob": "prisma/schema.prisma",
+            "output": "prisma"
+          }
+        ],
+        "external": [  
+          "@prisma/client",
+          "@prisma/adapter-pg",
+          "pg",
+          "bcrypt",
+          "express",
+          "swagger-ui-express",
+          "swagger-jsdoc"
+        ],
+        "esbuildOptions": {
+          "sourcemap": true
+        }
+      },
+      "configurations": {
+        "development": {
+          "esbuildOptions": {
+            "sourcemap": true,
+            "define": {
+              "process.env.NODE_ENV": "\"development\""
+            }
+          }
+        },
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "minify": true,
+            "define": {
+              "process.env.NODE_ENV": "\"production\""
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "@org/identity-service:build:development",
+        "inspect": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "@org/identity-service:build:development"
+        },
+        "production": {
+          "buildTarget": "@org/identity-service:build:production"
+        }
+      }
+    },
+    "prisma": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "prisma generate",
+        "cwd": "apps/identity-service"
+      }
+    }
+  },
+  "tags": []
+}

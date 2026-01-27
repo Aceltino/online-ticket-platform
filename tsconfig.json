@@ -1,0 +1,37 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "files": [],
+  "references": [
+    {
+      "path": "./apps/identity-service"
+    },
+    {
+      "path": "./libs/shared/utils"
+    },
+    {
+      "path": "./libs/shared/http"
+    },
+    {
+      "path": "./libs/shared/errors"
+    },
+    {
+      "path": "./libs/shared/logger"
+    },
+    {
+      "path": "./libs/shared/config"
+    },
+    {
+      "path": "./libs/domain/identity"
+    },
+    {
+      "path": "./libs/contracts/events"
+    },
+    {
+      "path": "./libs/contracts/dtos"
+    },
+    {
+      "path": "./apps/catalog-service"
+    }
+  ]
+}

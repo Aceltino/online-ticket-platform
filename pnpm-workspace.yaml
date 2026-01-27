@@ -1,0 +1,11 @@
+packages:
+  - 'packages/*'
+  - 'identity-service'
+  - 'apps'
+  - 'apps/*'
+  - 'shared'
+  - 'lib/shared'
+  - 'libs/*'
+  - 'libs/shared/*'
+  - 'libs/domain/*'
+  - 'libs/contracts/*'
