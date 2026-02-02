@@ -10,7 +10,7 @@ const swcJestConfig = JSON.parse(
 swcJestConfig.swcrc = false;
 
 module.exports = {
-  displayName: '@org/catalog-service',
+  displayName: '@org/profile-service',
   preset: '../../jest.preset.js',
   testEnvironment: 'node',
   transform: {

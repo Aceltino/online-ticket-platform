@@ -1,1 +1,1 @@
-export * from './lib/events.js';
+export * from './lib/user.created.event.js';

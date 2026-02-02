@@ -76,5 +76,6 @@ await prisma.user.upsert({
     },
     });
   }
+  
 }
 

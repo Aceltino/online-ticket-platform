@@ -32,6 +32,9 @@
     },
     {
       "path": "./apps/catalog-service"
+    },
+    {
+      "path": "./apps/profile-service"
     }
   ]
 }

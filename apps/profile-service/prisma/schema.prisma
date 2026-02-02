@@ -1,0 +1,34 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/infrastructure/persistence/prisma/generated-client"
+}
+
+enum DOCUMENT_TYPE {
+  PASSPORT
+  ID_CARD
+}
+
+model Person {
+  id              String        @id @default(uuid())
+  userId          String        @unique @map("user_id")
+
+  fullName        String        @map("full_name")
+  dateOfBirth     DateTime?     @map("date_of_birth")
+
+  countryId       String        @map("country_id")
+  nationality     String?
+
+  documentType    DOCUMENT_TYPE @map("document_type")
+  documentNumber  String        @unique @map("document_number")
+
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  @@map("persons")
+}
+
+

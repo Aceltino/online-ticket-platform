@@ -1,5 +1,5 @@
 {
-  "name": "@org/catalog-service",
+  "name": "@org/profile-service",
   "version": "0.0.1",
   "private": true,
   "nx": {
@@ -12,15 +12,15 @@
         "defaultConfiguration": "production",
         "options": {
           "platform": "node",
-          "outputPath": "apps/catalog-service/dist",
+          "outputPath": "apps/profile-service/dist",
           "format": [
             "cjs"
           ],
           "bundle": false,
-          "main": "apps/catalog-service/src/main.ts",
-          "tsConfig": "apps/catalog-service/tsconfig.app.json",
+          "main": "apps/profile-service/src/main.ts",
+          "tsConfig": "apps/profile-service/tsconfig.app.json",
           "assets": [
-            "apps/catalog-service/src/assets"
+            "apps/profile-service/src/assets"
           ],
           "esbuildOptions": {
             "sourcemap": true,
@@ -48,8 +48,8 @@
         "cache": true,
         "executor": "@nx/js:prune-lockfile",
         "outputs": [
-          "{workspaceRoot}/apps/catalog-service/dist/package.json",
-          "{workspaceRoot}/apps/catalog-service/dist/pnpm-lock.yaml"
+          "{workspaceRoot}/apps/profile-service/dist/package.json",
+          "{workspaceRoot}/apps/profile-service/dist/pnpm-lock.yaml"
         ],
         "options": {
           "buildTarget": "build"
@@ -61,7 +61,7 @@
         ],
         "cache": true,
         "outputs": [
-          "{workspaceRoot}/apps/catalog-service/dist/workspace_modules"
+          "{workspaceRoot}/apps/profile-service/dist/workspace_modules"
         ],
         "executor": "@nx/js:copy-workspace-modules",
         "options": {
@@ -83,15 +83,15 @@
           "build"
         ],
         "options": {
-          "buildTarget": "@org/catalog-service:build",
+          "buildTarget": "@org/profile-service:build",
           "runBuildTargetDependencies": false
         },
         "configurations": {
           "development": {
-            "buildTarget": "@org/catalog-service:build:development"
+            "buildTarget": "@org/profile-service:build:development"
           },
           "production": {
-            "buildTarget": "@org/catalog-service:build:production"
+            "buildTarget": "@org/profile-service:build:production"
           }
         }
       },
@@ -103,6 +103,25 @@
     }
   },
   "dependencies": {
-    "express": "^4.21.2"
+    "@org/dtos": "workspace:*",
+    "@org/errors": "workspace:*",
+    "@org/http": "workspace:*",
+    "@org/logger": "workspace:*",
+    "@org/events": "workspace:*",
+
+    "@prisma/adapter-pg": "^7.2.0",
+    "@prisma/client": "^7.2.0",
+    "amqplib": "^0.10.9",
+    "express": "^4.21.2",
+    "pg": "^8.17.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^11.0.0",
+    "prisma": "^7.2.0",
+    "vitest": "^4.0.18",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   }
 }
