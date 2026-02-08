@@ -12,10 +12,11 @@ export class RabbitMQEventDispatcher implements EventDispatcher {
       durable: true,
     });
 
-channel.publish(
-  'identity.events',
-  'user.created',
-  Buffer.from(JSON.stringify(event)),
-);
+    channel.publish(
+      exchange,
+      'user.created',
+      Buffer.from(JSON.stringify(event)),
+      { persistent: true },
+    );
   }
 }

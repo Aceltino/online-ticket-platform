@@ -1,6 +1,6 @@
-    import { DocumentType } from '../enums/document-type.enum';
+import { DocumentType } from '../enums/document-type.enum';
 
-    interface CreatePersonProps {
+interface CreatePersonProps {
     userId: string;
     fullName: string;
     countryId: string;
@@ -8,20 +8,36 @@
     documentNumber: string;
     nationality?: string;
     dateOfBirth?: Date;
-    }
+}
 
-    export class Person {
-    private constructor(private props: CreatePersonProps & { id: string }) {}
+export class Person {
+    private constructor(private props: CreatePersonProps & { id: string }) { }
 
     static create(props: CreatePersonProps): Person {
         return new Person({
-        ...props,
-        id: crypto.randomUUID(),
+            ...props,
+            id: crypto.randomUUID(),
         });
     }
 
     static restore(props: CreatePersonProps & { id: string }): Person {
         return new Person(props);
+    }
+
+    complete(data: {
+        fullName: string;
+        dateOfBirth?: Date;
+        countryId: string;
+        nationality?: string;
+        documentType: DocumentType;
+        documentNumber: string;
+    }) {
+        this.props.fullName = data.fullName;
+        this.props.dateOfBirth = data.dateOfBirth;
+        this.props.countryId = data.countryId;
+        this.props.nationality = data.nationality;
+        this.props.documentType = data.documentType;
+        this.props.documentNumber = data.documentNumber;
     }
 
     get id() {
@@ -57,4 +73,4 @@
     }
 
 
-    }
+}

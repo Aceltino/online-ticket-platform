@@ -1,7 +1,7 @@
 import { DomainEvent } from './domain-event';
 
 export class UserCreatedEvent implements DomainEvent {
-  name = 'UserCreated';
+  name = 'user.created';
   occurredAt = new Date();
 
   constructor(
