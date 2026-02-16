@@ -76,6 +76,47 @@ services:
       - rabbitmq
 
   # -------------------------
+  # PROFILE SERVICE
+  # -------------------------
+  profile:
+    build:
+      context: ../../
+      dockerfile: apps/profile-service/Dockerfile
+    container_name: profile_service
+    restart: always
+    ports:
+      - "3001:3001"
+    env_file:
+      - ../../apps/profile-service/.env
+    environment:
+      - DATABASE_URL=postgresql://identity_user:identity_pass@postgres:5432/profile_db?sslmode=disable
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
+    depends_on:
+      - postgres
+      - rabbitmq
+
+  # -------------------------
+  # API GATEWAY
+  # -------------------------
+  api-gateway:
+      build:
+        context: ../../
+        dockerfile: apps/api-gateway/Dockerfile
+      container_name: api_gateway
+      restart: always
+      ports:
+        - "8080:8080"
+      environment:
+        - HOST=0.0.0.0  # <--- ESSENCIAL
+        - PORT=8080
+        - IDENTITY_SERVICE_URL=http://identity_service:3000 # Use o container_name
+        - PROFILE_SERVICE_URL=http://profile_service:3001
+      depends_on:
+        - identity
+        - profile
+
+
+  # -------------------------
   # PGWEB (DB UI)
   # -------------------------
   pgweb:

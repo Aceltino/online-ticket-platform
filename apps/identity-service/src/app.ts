@@ -20,8 +20,8 @@ export function createApp(): Express {
     customSiteTitle: 'Identity Service API',
   }));
 
-  app.use('/auth', authRoutes);
-  app.use('/users', userRoutes);
+  app.use('/', authRoutes);
+  app.use('/', userRoutes);
 
   app.get('/health', (_, res) => {
     res.status(200).json({ status: 'ok' });

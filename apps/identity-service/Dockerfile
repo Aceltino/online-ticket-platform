@@ -15,7 +15,7 @@ RUN pnpm install --frozen-lockfile
 # Copia o restante (incluindo tsconfigs da raiz)
 COPY . .
 
-RUN DATABASE_URL="postgresql://user:pass@localhost:5432/db" pnpm --filter @org/identity-service exec prisma generate
+RUN DATABASE_URL="postgresql://identity_user:identity_pass@localhost:5432/identity_db" pnpm --filter @org/identity-service exec prisma generate
 EXPOSE 3000
 
 # No seu apps/identity-service/Dockerfile, altere a última linha:
