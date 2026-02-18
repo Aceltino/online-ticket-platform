@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 
 import { RegisterUserUseCase } from '../../../application/use-cases/register-user.use-case';
+import { DeleteUserUseCase } from '../../../application/use-cases/delete-user.use-case';
 import { AuthenticateUserUseCase } from '../../../application/use-cases/authenticate-user.use-case';
 import { RefreshTokenUseCase } from '../../../application/use-cases/refresh-token.use-case';
 import { LogoutUseCase } from '../../../application/use-cases/logout.use-case';
@@ -21,6 +22,7 @@ export class AuthController {
     private readonly authenticateUserUseCase: AuthenticateUserUseCase,
     private readonly refreshTokenUseCase: RefreshTokenUseCase,
     private readonly logoutUseCase: LogoutUseCase,
+    private readonly deleteUserUseCase: DeleteUserUseCase,
   ) { }
 
   async register(req: Request, res: Response, next: NextFunction): Promise<any> {
@@ -86,7 +88,7 @@ export class AuthController {
     }
   }
 
-  async me( req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<any> {
+  async me(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<any> {
     try {
       return res.status(200).json(
         successResponse({
@@ -98,7 +100,7 @@ export class AuthController {
     }
   }
 
-    async logout( req: Request, res: Response,next: NextFunction ): Promise<any> {
+  async logout(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       // 1️⃣ Validação (Adapter HTTP)
       const parsed = logoutSchema.safeParse(req.body);
@@ -114,6 +116,16 @@ export class AuthController {
       await this.logoutUseCase.execute(parsed.data.refreshToken);
 
       // 3️⃣ Resposta HTTP
+      return res.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async deleteUser(req: Request, res: Response, next: NextFunction): Promise<any> {
+    try {
+      const { id } = req.params;
+      await this.deleteUserUseCase.execute(id); // Você vai injetar isso no constructor
       return res.status(204).send();
     } catch (error) {
       next(error);

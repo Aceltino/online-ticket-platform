@@ -2,21 +2,19 @@ import { Router } from 'express';
 import { authenticate } from '../middlewares/auth.middleware';
 import { authorize } from '../middlewares/rbac.middleware';
 import { ROLES } from '../security/roles';
-import {
-  identityProxy,
-  profileProxy,
-} from '../proxy/service-proxy';
+import { identityProxy, profileProxy } from '../proxy/service-proxy';
+import { RegistrationController } from '../controllers/registration.controller';
+
+const registrationController = new RegistrationController();
+
+// Esta rota é orquestrada pelo BFF
 
 const router: Router = Router();
 
+router.post('/complete-register', registrationController.register.bind(registrationController));
+
 /* 🔓 Públicas */
 router.use('/auth', identityProxy);
-// router.use('/auth/login', identityProxy);
-// router.use('/auth/refresh', identityProxy);
-
-// /* 🔐 Auth */
-// router.use('/auth/me', authenticate, identityProxy);
-// router.use('/auth/logout', authenticate, identityProxy);
 
 /* 🔐 Profile */
 router.use('/profiles', authenticate, profileProxy);

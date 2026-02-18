@@ -13,6 +13,7 @@ export function createApp(): Express {
   new RedisRefreshTokenRepository(redis);
 
   app.use(json());
+
   app.use('/docs', swaggerUi.serve);
   app.get('/docs', swaggerUi.setup(swaggerSpec, {
     explorer: true,
@@ -20,8 +21,8 @@ export function createApp(): Express {
     customSiteTitle: 'Identity Service API',
   }));
 
-  app.use('/', authRoutes);
-  app.use('/', userRoutes);
+  app.use('/auth', authRoutes);
+  app.use('/users', userRoutes);
 
   app.get('/health', (_, res) => {
     res.status(200).json({ status: 'ok' });

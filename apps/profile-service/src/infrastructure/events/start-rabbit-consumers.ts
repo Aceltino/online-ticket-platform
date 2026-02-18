@@ -11,13 +11,21 @@ export async function startRabbitConsumers(
 
   const queue = 'profile.user-created';
 
-  channel.consume(queue, async (msg) => {
+  await channel.consume(queue, async (msg) => {
     if (!msg) return;
 
-    const event = JSON.parse(msg.content.toString());
+    try {
+      const event = JSON.parse(msg.content.toString());
 
-    await userCreatedConsumer.handle(event);
+      await userCreatedConsumer.handle(event);
 
-    channel.ack(msg);
+      channel.ack(msg);
+    } catch (error) {
+      console.error('Consumer error:', error);
+
+      channel.nack(msg, false, false);
+    }
   });
+
+  console.log('🐇 Listening to queue:', queue);
 }

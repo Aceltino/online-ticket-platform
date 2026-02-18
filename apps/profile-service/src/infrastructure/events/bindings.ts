@@ -8,7 +8,10 @@ export async function setupUserCreatedBinding() {
 
   await channel.assertExchange(exchange, 'topic', { durable: true });
 
-  await channel.assertQueue(queue, { durable: true });
+  await channel.assertQueue(queue, {
+    durable: true,
+  });
 
   await channel.bindQueue(queue, exchange, 'user.created');
 }
+

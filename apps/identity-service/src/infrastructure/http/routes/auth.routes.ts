@@ -9,6 +9,8 @@ import { RegisterUserUseCase } from '../../../application/use-cases/register-use
 import { AuthenticateUserUseCase } from '../../../application/use-cases/authenticate-user.use-case';
 import { RefreshTokenUseCase } from '../../../application/use-cases/refresh-token.use-case';
 import { LogoutUseCase } from '../../../application/use-cases/logout.use-case';
+import { DeleteUserUseCase } from '../../../application/use-cases/delete-user.use-case';
+
 
 // Infra
 import { PrismaUserRepository } from '../../persistence/repositories/prismaUserRepository';
@@ -56,6 +58,8 @@ const logoutUseCase = new LogoutUseCase(
   refreshTokenRepository,
 );
 
+const deleteUserUseCase = new DeleteUserUseCase(userRepository);
+
 /**
  * 🔹 Controller
  */
@@ -64,6 +68,7 @@ const authController = new AuthController(
   authenticateUserUseCase,
   refreshTokenUseCase,
   logoutUseCase,
+  deleteUserUseCase
 );
 
 /**
@@ -211,5 +216,7 @@ router.post('/logout', isAuthenticated(tokenManager), authController.logout.bind
  *         description: Unauthorized
  */
 router.get('/me', isAuthenticated(tokenManager), authController.me.bind(authController));
+
+router.delete('/:id', authController.deleteUser.bind(authController));
 
 export { router as authRoutes };

@@ -59,23 +59,29 @@ export class PrismaUserRepository implements IUserRepository {
   }
 
   async save(user: User): Promise<void> {
-await prisma.user.upsert({
-    where: { id: user.getId() },
-    update: {
+    await prisma.user.upsert({
+      where: { id: user.getId() },
+      update: {
         email: user.getEmail(),
         passwordHash: user.getPasswordHash(),
         role: user.getRole(),
         status: user.getStatus(),
-    },
-    create: {
+      },
+      create: {
         id: user.getId(),
         email: user.getEmail(),
         passwordHash: user.getPasswordHash(),
         role: user.getRole(),
         status: user.getStatus(),
-    },
+      },
     });
   }
-  
+
+  async delete(id: string): Promise<void> {
+    await prisma.user.delete({
+      where: { id }
+    });
+  }
+
 }
 

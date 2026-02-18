@@ -6,7 +6,7 @@ export class RabbitMQEventDispatcher implements EventDispatcher {
   async dispatch(event: DomainEvent): Promise<void> {
     const channel = await getRabbitChannel();
 
-    const exchange = 'domain-events';
+    const exchange = 'identity.events';
 
     await channel.assertExchange(exchange, 'topic', {
       durable: true,
@@ -18,5 +18,7 @@ export class RabbitMQEventDispatcher implements EventDispatcher {
       Buffer.from(JSON.stringify(event)),
       { persistent: true },
     );
+
+    console.log('📤 Publishing UserCreated event:', event);
   }
 }

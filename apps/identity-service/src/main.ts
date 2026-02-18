@@ -7,5 +7,5 @@ const app = createApp();
 app.listen(3000, '0.0.0.0', () => {
   console.log(`🚀 Identity Service running on port ${PORT}`);
   console.log(`Swagger documentation available at http://localhost:${PORT}/docs`);
-
+  console.log('🔌 Connecting to RabbitMQ:', process.env.RABBITMQ_URL);
 });

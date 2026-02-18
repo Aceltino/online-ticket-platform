@@ -1,4 +1,4 @@
-// apps/api-gateway/src/main.ts
+import 'dotenv/config';
 import express from 'express';
 import router from './routes'; // <--- Importante!
 

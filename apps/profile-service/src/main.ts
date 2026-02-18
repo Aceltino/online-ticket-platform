@@ -4,7 +4,8 @@ import { createApp } from './app';
 const PORT = process.env.PORT || 3001;
 const app = createApp();
 
-app.listen(PORT, () => {
-  console.log(`🚀 Identity Service running on port ${PORT}`);
-  console.log(`Swagger documentation available at http://localhost:${PORT}/docs`);
+app.listen(PORT, async () => {
+  console.log(`🚀 Profile Service running on port ${PORT}`);
+  
+  console.log('📡 Listening for HTTP orchestration from BFF');
 });

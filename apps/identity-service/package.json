@@ -6,7 +6,7 @@
   },
   "version": "0.0.1",
   "private": true,
-   "workspaces": [
+  "workspaces": [
     "apps/*",
     "packages/*"
   ],
@@ -14,7 +14,9 @@
     "targets": {
       "build": {
         "executor": "@nx/esbuild:esbuild",
-        "outputs": ["{options.outputPath}"],
+        "outputs": [
+          "{options.outputPath}"
+        ],
         "options": {
           "platform": "node",
           "outputPath": "dist/apps/identity-service",
@@ -118,10 +120,11 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
+    "@types/node": "20.19.9",
     "dotenv-cli": "^11.0.0",
     "prisma": "^7.2.0",
-    "vitest": "^4.0.18",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "vitest": "^4.0.18"
   }
 }

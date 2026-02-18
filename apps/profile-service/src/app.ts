@@ -1,5 +1,7 @@
 import 'dotenv/config';
 import express, { Express, json } from 'express';
+import { profileRoutes } from './infrastructure/http/routes/profile.routes';
+
 // import swaggerUi from 'swagger-ui-express';
 // import { swaggerSpec } from './infrastructure/swagger/swagger-config';
 
@@ -19,6 +21,8 @@ export function createApp(): Express {
 //     customCss: '.swagger-ui .topbar { display: none }',
 //     customSiteTitle: 'Identity Service API',
 //   }));
+
+  app.use('/', profileRoutes);
 
 
   app.get('/health', (_, res) => {

@@ -44,12 +44,6 @@ const userController = new UserController(
   suspendUserUseCase,
 );
 
-
-router.use((req, res, next) => {
-  console.log(`➡️ Recebido: ${req.method} ${req.url}`);
-  next();
-});
-
 // Suas rotas abaixo...
 /**
  * 🔹 Routes (ADMIN only)

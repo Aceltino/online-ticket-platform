@@ -106,7 +106,10 @@ services:
       restart: always
       ports:
         - "8080:8080"
+      env_file:
+      - ../../apps/api-gateway/.env
       environment:
+        - JWT_ACCESS_SECRET=aceltino_A
         - HOST=0.0.0.0  # <--- ESSENCIAL
         - PORT=8080
         - IDENTITY_SERVICE_URL=http://identity_service:3000 # Use o container_name

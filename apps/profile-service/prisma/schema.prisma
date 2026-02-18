@@ -4,7 +4,6 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/infrastructure/persistence/prisma/generated-client"
 }
 
 enum DOCUMENT_TYPE {
@@ -30,5 +29,3 @@ model Person {
 
   @@map("persons")
 }
-
-

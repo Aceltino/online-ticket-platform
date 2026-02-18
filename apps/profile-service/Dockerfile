@@ -19,8 +19,7 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 
 # Prisma generate (IMPORTANTE usar postgres como host)
-RUN DATABASE_URL="postgresql://identity_user:identity_pass@postgres:5432/profile_db?schema=public" \
-    pnpm --filter @org/profile-service exec prisma generate
+RUN DATABASE_URL="postgresql://identity_user:identity_pass@localhost:5432/profile_db" pnpm --filter @org/profile-service exec prisma generate
 
 EXPOSE 3001
 
